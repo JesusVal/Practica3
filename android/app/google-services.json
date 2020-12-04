@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "959325253276",
+    "project_id": "practica3-ac756",
+    "storage_bucket": "practica3-ac756.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:959325253276:android:0b0d28394550d1dd1c8759",
+        "android_client_info": {
+          "package_name": "mx.iteso.noticias"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "959325253276-16dv9i513mec8kadm3h8p0dii31lq6ma.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDURd2r-R9H4_6Vbus3n7Yh_Rw3m7WLPwg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "959325253276-16dv9i513mec8kadm3h8p0dii31lq6ma.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
