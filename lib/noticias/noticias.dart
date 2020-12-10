@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:noticias/noticias/noticia_deportes.dart';
 
 import 'bloc/noticias_bloc.dart';
+import 'noticia_deportes.dart';
 import 'noticia_negocios.dart';
 
 class Noticias extends StatefulWidget {
-  Noticias({Key key}) : super(key: key);
+  final NoticiasBloc bloc;
+  Noticias({Key key, this.bloc}) : super(key: key);
 
   @override
   _NoticiasState createState() => _NoticiasState();
 }
 
 class _NoticiasState extends State<Noticias> {
+  NoticiasBloc _bloc;
   final _tabsList = [
     Tab(icon: Icon(Icons.article), text: "Deportes"),
     Tab(icon: Icon(Icons.description), text: "Negocios"),
@@ -30,7 +32,10 @@ class _NoticiasState extends State<Noticias> {
           ),
         ),
         body: BlocProvider(
-          create: (context) => NoticiasBloc()..add(GetNewsEvent()),
+          create: (context) {
+            _bloc = widget.bloc..add(GetNewsEvent());
+            return _bloc;
+          },
           child: BlocConsumer<NoticiasBloc, NoticiasState>(
             listener: (context, state) {
               //

@@ -12,10 +12,13 @@ part 'noticias_event.dart';
 part 'noticias_state.dart';
 
 class NoticiasBloc extends Bloc<NoticiasEvent, NoticiasState> {
+  // final String apiKey = "509736b666f2409c925421d44ea84c25";
   final _sportsLink =
-      "https://newsapi.org/v2/top-headlines?country=mx&category=sports&$apiKey";
+      "https://newsapi.org/v2/top-headlines?country=mx&category=sports&apiKey=509736b666f2409c925421d44ea84c25";
+  // "https://newsapi.org/v2/top-headlines?country=mx&category=sports&$apiKey";
   final _businessLink =
-      "https://newsapi.org/v2/top-headlines?country=mx&category=business&$apiKey";
+      "https://newsapi.org/v2/top-headlines?country=mx&category=business&apiKey=509736b666f2409c925421d44ea84c25";
+  // "https://newsapi.org/v2/top-headlines?country=mx&category=business&$apiKey";
   NoticiasBloc() : super(NoticiasInitial());
 
   @override
@@ -32,6 +35,34 @@ class NoticiasBloc extends Bloc<NoticiasEvent, NoticiasState> {
           noticiasSportList: soportsNews,
           noticiasBusinessList: businessNews,
         );
+      } catch (e) {
+        yield NoticiasErrorState(message: "Error al cargar noticias: $e");
+      }
+    }
+    if (event is NoticiasBuscarEvent) {
+      String search = event.search.toLowerCase();
+      try {
+        List<Noticia> soportsNews = await _requestSportNoticias();
+        List<Noticia> businessNews = await _requestBusinessNoticias();
+        List<Noticia> merge = List<Noticia>();
+        merge.addAll(soportsNews);
+        merge.addAll(businessNews);
+        var result = merge.where((element) {
+          var title = element.title;
+          var desc = element.description;
+          var content = element.content;
+          if (title != null && title.toLowerCase().contains(search)) {
+            return true;
+          }
+          if (desc != null && desc.toLowerCase().contains(search)) {
+            return true;
+          }
+          if (content != null && content.toLowerCase().contains(search)) {
+            return true;
+          }
+          return false;
+        }).toList();
+        yield NoticasBuscarResultState(noticias: result);
       } catch (e) {
         yield NoticiasErrorState(message: "Error al cargar noticias: $e");
       }

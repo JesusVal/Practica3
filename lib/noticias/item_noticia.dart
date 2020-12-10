@@ -3,7 +3,7 @@ import 'package:noticias/models/noticia.dart';
 
 class ItemNoticia extends StatelessWidget {
   final Noticia noticia;
-  ItemNoticia({Key key, @required this.noticia}) : super(key: key);
+  ItemNoticia({Key key, this.noticia}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class ItemNoticia extends StatelessWidget {
               Expanded(
                 flex: 1,
                 child: Image.network(
-                  "${noticia.urlToImage}",
+                  (noticia.urlToImage != null) ? noticia.urlToImage : '',
                   height: 100,
                   fit: BoxFit.cover,
                 ),
@@ -31,7 +31,7 @@ class ItemNoticia extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        "${noticia.title}",
+                        (noticia.title != null) ? noticia.title : '',
                         maxLines: 1,
                         overflow: TextOverflow.clip,
                         style: TextStyle(
@@ -40,7 +40,9 @@ class ItemNoticia extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        "${noticia.publishedAt}",
+                        (noticia.publishedAt != null)
+                            ? noticia.publishedAt
+                            : "Sin fecha",
                         style: TextStyle(
                           fontWeight: FontWeight.w300,
                           color: Colors.grey,
@@ -49,13 +51,15 @@ class ItemNoticia extends StatelessWidget {
                       ),
                       SizedBox(height: 16),
                       Text(
-                        "${noticia.description ?? "Descripcion no disponible"}",
+                        (noticia.description != null)
+                            ? noticia.description
+                            : "Sin descripción",
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                       ),
                       SizedBox(height: 16),
                       Text(
-                        "${noticia.author ?? "Autor no disponible"}",
+                        (noticia.author != null) ? noticia.author : "Sin autor",
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(

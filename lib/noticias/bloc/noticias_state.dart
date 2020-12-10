@@ -19,6 +19,13 @@ class NoticiasSuccessState extends NoticiasState {
   List<Object> get props => [noticiasSportList, noticiasBusinessList];
 }
 
+class NoticasBuscarResultState extends NoticiasState {
+  final List<Noticia> noticias;
+  NoticasBuscarResultState({this.noticias});
+  @override
+  List<Object> get props => [noticias];
+}
+
 class NoticiasErrorState extends NoticiasState {
   final String message;
 
